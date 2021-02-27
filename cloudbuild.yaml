@@ -1,0 +1,26 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "--no-cache", "-t", "$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA", ".", "-f", "Dockerfile"]
+    id: Build
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"]
+    id: Push
+  - name: "gcr.io/cloud-builders/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update
+      - $_SERVICE_NAME
+      - "--platform=managed"
+      - "--image=$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
+      - "--region=$_DEPLOY_REGION"
+      - "--quiet"
+    id: Deploy
+timeout: 6400s
+images:
+  - "$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
+substitutions:
+  _SERVICE_NAME: leadwallet-eth
+  _DEPLOY_REGION: us-central1
+  _PLATFORM: managed
