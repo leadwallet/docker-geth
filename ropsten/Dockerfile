@@ -4,5 +4,5 @@ COPY rungeth.docker /usr/bin/rungeth
 COPY geth.password /root/password
 COPY genesis.json /root/genesis.json
 COPY ethereum /root/.ethereum
-EXPOSE 8110 8990 
+EXPOSE 8545
 ENTRYPOINT ["/usr/bin/rungeth", "--ropsten", "--syncmode \"full\"", "--rpc", "--http", "--http.crossdomain '*'"]
