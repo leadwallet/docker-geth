@@ -5,4 +5,4 @@ FROM ethereum/client-go
 # COPY genesis.json /root/genesis.json
 # COPY ethereum /root/.ethereum
 EXPOSE 8545
-ENTRYPOINT ["/usr/bin/rungeth", "--ropsten", "--syncmode \"full\"", "--http", "--http.corsdomain '*'", "console"]
+ENTRYPOINT ["geth", "--ropsten", "--syncmode \"full\"", "--http", "--http.corsdomain '*'", "console"]
