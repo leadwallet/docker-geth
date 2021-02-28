@@ -5,4 +5,4 @@ COPY geth.password /root/password
 COPY genesis.json /root/genesis.json
 COPY ethereum /root/.ethereum
 EXPOSE 8545
-ENTRYPOINT ["/usr/bin/rungeth", "--ropsten", "--syncmode \"full\"", "--rpc", "--http", "--http.crossdomain '*'"]
+ENTRYPOINT ["/usr/bin/rungeth", "--ropsten", "--syncmode \"full\"", "--rpc", "--http", "--http.crossdomain '*'", "console"]
