@@ -12,7 +12,7 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - push
-      - $PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA
+      - "$PROJECT_ID/$REPO_NAME/$_SERVICE_NAME:$COMMIT_SHA"
     id: Push
   - name: "gcr.io/cloud-builders/cloud-sdk"
     entrypoint: gcloud
